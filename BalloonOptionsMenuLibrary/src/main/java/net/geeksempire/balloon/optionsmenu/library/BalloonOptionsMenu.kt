@@ -78,7 +78,13 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
             }
 
-            allBalloonOptionsMenuItemsView.addView(itemLayout)
+            try {
+
+                allBalloonOptionsMenuItemsView.addView(itemLayout)
+
+            } catch (e: Exception) {
+
+            }
 
         }
 
