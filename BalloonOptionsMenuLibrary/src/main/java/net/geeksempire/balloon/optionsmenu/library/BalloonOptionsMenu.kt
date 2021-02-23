@@ -4,25 +4,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import net.geeksempire.balloon.optionsmenu.library.Utils.displayX
 import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
 
 interface BalloonItemsAction {
-    fun onBalloonItemClickListener(balloonOptionsRootView: View, view: View)
+    fun onBalloonItemClickListener(balloonOptionsMenu: BalloonOptionsMenu, balloonOptionsRootView: View, itemView: View)
 }
 
 class BalloonOptionsMenu (private val context: AppCompatActivity,
                           private val rootView: ViewGroup,
-                          private val clickListener: BalloonItemsAction) {
+                          private val balloonItemsAction: BalloonItemsAction) {
 
-    private val balloonOptionsRootView = LayoutInflater.from(context).inflate(R.layout.balloon_options_menu_layout, null)
-    private val allItemsView = balloonOptionsRootView.findViewById<LinearLayout>(R.id.allItemsView)
+    private val balloonOptionsMenuLayoutBinding = LayoutInflater.from(context).inflate(R.layout.balloon_options_menu_layout, null)
+    private val allBalloonOptionsMenuItemsView = balloonOptionsMenuLayoutBinding.findViewById<LinearLayout>(R.id.allBalloonOptionsMenuItemsView)
 
     private val positionXY = IntArray(2)
 
@@ -32,7 +30,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
     var balloonOptionsAdded = false
 
     fun initializeBalloonPosition(anchorView: View,
-                                  startAnimation: Animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in)) : BalloonOptionsMenu {
+                                  startAnimationId: Int = android.R.anim.fade_in) : BalloonOptionsMenu {
 
         anchorView.getLocationInWindow(positionXY)
 
@@ -44,21 +42,19 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
             balloonOptionsAdded = false
 
-            rootView.removeView(balloonOptionsRootView)
+            rootView.removeView(balloonOptionsMenuLayoutBinding)
 
         }
 
-        rootView.addView(balloonOptionsRootView)
-        balloonOptionsRootView.startAnimation(startAnimation)
+        rootView.addView(balloonOptionsMenuLayoutBinding)
+        balloonOptionsMenuLayoutBinding.startAnimation(AnimationUtils.loadAnimation(context, startAnimationId))
 
-        val balloonLayoutParams = balloonOptionsRootView.layoutParams as ConstraintLayout.LayoutParams
-
-        balloonOptionsRootView.x = (displayX(context) / 2).toFloat() - dpToInteger(context, 75)
-        balloonOptionsRootView.y = viewY.toFloat()
+        balloonOptionsMenuLayoutBinding.x = (displayX(context) / 2).toFloat() - dpToInteger(context, 75)
+        balloonOptionsMenuLayoutBinding.y = viewY.toFloat()
 
         balloonOptionsAdded = true
 
-        balloonOptionsRootView.setOnFocusChangeListener { view, hasFocus ->
+        balloonOptionsMenuLayoutBinding.setOnFocusChangeListener { view, hasFocus ->
 
 
         }
@@ -66,7 +62,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
         return this@BalloonOptionsMenu
     }
 
-    fun setupOptionsItems(titlesOfItems: Array<String>) {
+    fun setupOptionsItems(titlesOfItems: ArrayList<String>) {
 
         titlesOfItems.forEach {
 
@@ -78,11 +74,11 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
             itemLayout.setOnClickListener { view ->
 
-                clickListener.onBalloonItemClickListener(balloonOptionsRootView, view)
+                balloonItemsAction.onBalloonItemClickListener(this@BalloonOptionsMenu, balloonOptionsMenuLayoutBinding, view)
 
             }
 
-            allItemsView.addView(itemLayout)
+            allBalloonOptionsMenuItemsView.addView(itemLayout)
 
         }
 
@@ -94,7 +90,7 @@ class BalloonOptionsMenu (private val context: AppCompatActivity,
 
             balloonOptionsAdded = false
 
-            rootView.removeView(balloonOptionsRootView)
+            rootView.removeView(balloonOptionsMenuLayoutBinding)
 
         }
 

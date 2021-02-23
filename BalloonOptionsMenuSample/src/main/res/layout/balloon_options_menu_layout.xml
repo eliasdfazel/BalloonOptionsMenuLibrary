@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BalloonOptionsMenuPhone">
@@ -10,10 +11,12 @@
         android:id="@+id/balloonOptionsMenuTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="7dp"
         android:text="@string/clickHereToTest"
         android:textColor="@android:color/holo_blue_bright"
         android:textSize="19sp"
-        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:background="@color/black"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

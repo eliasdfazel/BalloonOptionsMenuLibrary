@@ -21,7 +21,7 @@
         apps:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:id="@+id/allItemsView"
+            android:id="@+id/allBalloonOptionsMenuItemsView"
             android:layout_width="wrap_content"
             android:layout_height="51dp"
             android:layout_gravity="center_vertical"
