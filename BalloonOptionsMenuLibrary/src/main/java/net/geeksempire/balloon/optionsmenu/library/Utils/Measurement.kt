@@ -17,17 +17,6 @@ import android.util.TypedValue
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-fun columnCount(context: Context, itemWidth: Int): Int {
-
-    var spanCount = (displayX(context) / dpToPixel(context, itemWidth.toFloat())).toInt()
-
-    if (spanCount < 1) {
-        spanCount = 1
-    }
-
-    return spanCount
-}
-
 fun dpToPixel(context: Context, dp: Float): Float {
 
     val resources: Resources = context.resources

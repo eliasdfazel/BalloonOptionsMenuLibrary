@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import net.geeksempire.balloon.optionsmenu.databinding.BalloonOptionsMenuLayoutBinding
 import net.geeksempire.balloon.optionsmenu.library.BalloonItemsAction
 import net.geeksempire.balloon.optionsmenu.library.BalloonOptionsMenu
+import net.geeksempire.balloon.optionsmenu.library.Circular.CircularMenuDataStructure
+import net.geeksempire.balloon.optionsmenu.library.Circular.CircularOptionMenu
 
 class BalloonOptionsMenuPhone : AppCompatActivity() {
 
@@ -16,6 +18,12 @@ class BalloonOptionsMenuPhone : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         balloonOptionsMenuLayoutBinding = BalloonOptionsMenuLayoutBinding.inflate(layoutInflater)
         setContentView(balloonOptionsMenuLayoutBinding.root)
+
+        CircularOptionMenu(context = this@BalloonOptionsMenuPhone,
+            rootView = balloonOptionsMenuLayoutBinding.rootView,
+            optionContainerView = balloonOptionsMenuLayoutBinding.circularOptionContainer,
+            arrayListOf(CircularMenuDataStructure(getDrawable(android.R.drawable.sym_contact_card)))
+        )
 
         balloonOptionsMenuLayoutBinding.balloonOptionsMenuTest.setOnClickListener { anchorView ->
 
