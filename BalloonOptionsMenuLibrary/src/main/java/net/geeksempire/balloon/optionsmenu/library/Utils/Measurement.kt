@@ -58,6 +58,16 @@ fun dpToInteger(context: Context, dp: Int): Int {
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics).toInt()
 }
 
+fun dpToFloat(context: Context, dp: Int): Float {
+
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.resources.displayMetrics)
+}
+
+fun calculateCircumference(circleRadius: Float) : Float {
+
+    return ((circleRadius * 2) * Math.PI).toFloat()
+}
+
 fun Float.spToInteger(context: Context) : Float {
 
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this@spToInteger, context.resources.displayMetrics)

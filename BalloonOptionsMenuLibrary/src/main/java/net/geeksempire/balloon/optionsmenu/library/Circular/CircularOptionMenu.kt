@@ -3,9 +3,13 @@ package net.geeksempire.balloon.optionsmenu.library.Circular
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import net.geeksempire.balloon.optionsmenu.library.Utils.dpToInteger
+import net.geeksempire.balloon.optionsmenu.library.Utils.calculateCircumference
+import net.geeksempire.balloon.optionsmenu.library.Utils.dpToFloat
 import net.geeksempire.balloon.optionsmenu.library.databinding.CircularOptionItemBinding
 import net.geeksempire.balloon.optionsmenu.library.databinding.CircularOptionsMenuLayoutBinding
+import kotlin.math.cos
+import kotlin.math.roundToInt
+import kotlin.math.sin
 
 class CircularOptionMenu (private val context: AppCompatActivity,
                           private val rootView: ConstraintLayout,
@@ -22,7 +26,7 @@ class CircularOptionMenu (private val context: AppCompatActivity,
 
         optionContainerView.addView(circularOptionsMenuLayoutBinding.root)
 
-        circularOptionsMenuLayoutBinding.rootView.setOnClickListener {
+        circularOptionsMenuLayoutBinding.circularOptionMenu.setOnClickListener {
 
             addMenuItems()
 
@@ -32,11 +36,11 @@ class CircularOptionMenu (private val context: AppCompatActivity,
 
     fun addMenuItems() {
 
-        (1..3).forEach { index ->
+        (1..6).forEach { itemIndex ->
 
             val circularOptionItemBinding: CircularOptionItemBinding = CircularOptionItemBinding.inflate(context.layoutInflater)
 
-            val itemPosition = calculateItemsPosition(index)
+            val itemPosition = calculateItemsPosition(itemIndex, circularOptionItemBinding)
 
             circularOptionItemBinding.root.x = itemPosition.first
             circularOptionItemBinding.root.y = itemPosition.second
@@ -47,12 +51,23 @@ class CircularOptionMenu (private val context: AppCompatActivity,
 
     }
 
-    private fun calculateItemsPosition(itemIndex: Int) : Pair<Float, Float> {
+    private fun calculateItemsPosition(itemIndex: Int, circularOptionItemBinding: CircularOptionItemBinding) : Pair<Float, Float> {
 
-        val positionX = optionContainerView.x - dpToInteger(context, 5 * itemIndex)
-        val positionY = optionContainerView.y - dpToInteger(context, 5 * itemIndex)
+        val centerPointX = optionContainerView.x + (circularOptionItemBinding.rootViewItem.width)
+        val centerPointY = optionContainerView.y + (circularOptionItemBinding.rootViewItem.height)
+
+        val positionX = (centerPointX + dpToFloat(context, 53) //Radius
+                * cos((itemIndex).toDouble())).toFloat() //Angle
+
+        val positionY = (centerPointY + dpToFloat(context, 53) //Radius
+                * sin((itemIndex).toDouble())).toFloat()//Angle
 
         return Pair(positionX, positionY)
+    }
+
+    private fun calculateMaximumNumberOfItem(circleRadius: Float, itemWidth: Int) : Int {
+
+        return (calculateCircumference(circleRadius)/itemWidth).roundToInt()
     }
 
 }

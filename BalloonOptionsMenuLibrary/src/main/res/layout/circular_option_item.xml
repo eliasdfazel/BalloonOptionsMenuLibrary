@@ -4,25 +4,24 @@
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rootViewItem"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="7dp">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:elevation="7dp"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
+        android:insetLeft="3dp"
+        android:insetTop="3dp"
+        android:insetRight="3dp"
+        android:insetBottom="3dp"
 
         apps:cornerRadius="51dp"
         apps:elevation="7dp"
         apps:icon="@android:drawable/ic_dialog_info"
-        apps:iconSize="51dp"
+        apps:iconSize="29dp"
         apps:iconGravity="textStart"
         apps:iconPadding="0dp"
-        apps:iconTint="@color/default_color_game"
+        apps:iconTint="@color/default_color"
         apps:rippleColor="@color/dark_transparent"
         apps:backgroundTint="@color/light"
 
