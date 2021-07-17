@@ -249,12 +249,6 @@ public class CircleMenuView extends FrameLayout {
         this.initButtonsByResources(context, icons, colors);
     }
 
-//    /**
-//     * Constructor for creation CircleMenuView in code, not in xml-layout.
-//     * @param context current context, will be used to access resources.
-//     * @param icons buttons icons array. Items must be @DrawableRes.
-//     * @param colors buttons colors resource ids array. Items must be @DrawableRes.
-//     */
     public CircleMenuView(@NonNull AppCompatActivity context, @NonNull List<Drawable> icons, @NonNull List<Integer> colors) {
         super(context);
 
@@ -423,8 +417,8 @@ public class CircleMenuView extends FrameLayout {
             final View button = mButtons.get(i);
             button.setX(centerX + x);
             button.setY(centerY + y);
-            button.setScaleX(1.0f * scale);
-            button.setScaleY(1.0f * scale);
+            button.setScaleX(0.73f * scale);
+            button.setScaleY(0.73f * scale);
         }
     }
 

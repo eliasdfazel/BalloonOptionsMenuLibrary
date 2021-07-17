@@ -24,7 +24,7 @@ class BalloonOptionsMenuPhone : AppCompatActivity() {
             arrayListOf(getDrawable(R.drawable.message_icon), getDrawable(R.drawable.message_icon), getDrawable(R.drawable.message_icon), getDrawable(R.drawable.message_icon), getDrawable(R.drawable.message_icon), getDrawable(R.drawable.message_icon)),
             arrayListOf(Color.GREEN, Color.BLUE, Color.MAGENTA, Color.GREEN, Color.BLUE, Color.MAGENTA))
 
-        circularOptionMenu.distance = dpToPixel(applicationContext, 51f)
+        circularOptionMenu.distance = dpToPixel(applicationContext, 73f)
 
         balloonOptionsMenuLayoutBinding.circularOptionContainer.addView(circularOptionMenu)
 
